@@ -42,13 +42,13 @@ cd Actividad-dataXY-base
 ### 2. Instalar y ejecutar la aplicación apk
 
 ```bash
-### tiene que ser en la misma red local ###
+### La red del celular tiene que estar en la misma red local ###
 ```
 
 ### 3. Ejecutar Flask
 
 ```bash
-python app.py
+python3 app.py
 ```
 
 ### 4. Probar en el navegador
