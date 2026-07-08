@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="2">
+<title>panel de ADMINISTRACION</title>
+
+<style>
+body{
+    margin:0;
+    padding:40px;
+    background:#111827;
+    color:white;
+    font-family:Arial,sans-serif;
+}
+.botones{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin:25px 0;
+}
+
+.botones a{
+    text-decoration:none;
+    color:white;
+    font-weight:bold;
+    padding:18px;
+    border-radius:12px;
+    text-align:center;
+    transition:.2s;
+}
+
+.disponible{background:#42f5c8;}
+.reservado{background:#f4d03f;}
+.ocupado{background:#ff6b81;}
+.mantenimiento{background:#33b5ff;}
+
+.botones a:hover{
+    transform:scale(1.05);
+    filter:brightness(1.1);
+}
+.card{
+    max-width:900px;
+    margin:auto;
+    background:#1f2937;
+    padding:30px;
+    border-radius:20px;
+    border:1px solid #38bdf8;
+    box-shadow:0 0 35px rgba(56,189,248,.25);
+}
+
+h1{
+    color:#38bdf8;
+}
+
+.estado{
+    margin:25px 0;
+    padding:20px;
+    font-size:35px;
+    text-align:center;
+    border-radius:15px;
+    background:#0f172a;
+}
+
+.terminal{
+    background:black;
+    color:#22c55e;
+    padding:15px;
+    border-radius:12px;
+    font-family:monospace;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>panel de ADMINISTRACION</h1>
+
+<p>Smart Parking System - ESP32</p>
+
+<div class="estado">
+{{ estado }}
+</div>
+
+<h2>Control</h2>
+
+<div class="botones">
+    <a class="disponible" href="/admin/disponible">Disponible</a>
+<a class="reservado" href="/admin/reservado">Reservado</a>
+<a class="ocupado" href="/admin/ocupado">Ocupado</a>
+<a class="mantenimiento" href="/admin/mantenimiento">Mantenimiento</a>
+</div>
+
+<h2>Historial</h2>
+
+<div class="terminal">
+{% for evento in historial %}
+> {{ evento }}<br>
+{% endfor %}
+</div>
+
+</div>
+
+</body>
+</html>

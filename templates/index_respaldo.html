@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Estacionamiento Inteligente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111827;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .card {
+            background: #1f2937;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #38bdf8;
+        }
+
+        .estado {
+            font-size: 28px;
+            margin: 20px;
+            font-weight: bold;
+        }
+
+        .botones a {
+            display: block;
+            margin: 12px auto;
+            padding: 15px;
+            width: 230px;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        .disponible { background: #16a34a; }
+        .reservado { background: #ca8a04; }
+        .ocupado { background: #dc2626; }
+        .mantenimiento { background: #2563eb; }
+
+        .terminal {
+            margin-top: 25px;
+            background: black;
+            color: #22c55e;
+            text-align: left;
+            padding: 15px;
+            border-radius: 10px;
+            height: 180px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Smart Parking System</h1>
+
+        <p>Sistema de control para estacionamiento inteligente con ESP32.</p>
+
+        <div class="estado">
+            Estado actual: {{ estado }}
+        </div>
+
+        <div class="botones">
+            <a class="disponible" href="/disponible">Disponible</a>
+            <a class="reservado" href="/reservado">Reservado</a>
+            <a class="ocupado" href="/ocupado">Ocupado</a>
+            <a class="mantenimiento" href="/mantenimiento">Mantenimiento</a>
+        </div>
+
+        <div class="terminal">
+            <strong>Terminal de eventos</strong><br><br>
+            {% for evento in historial %}
+                > {{ evento }}<br>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

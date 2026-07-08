@@ -1,32 +1,81 @@
 from flask import Flask, render_template
-import socket
-app = Flask(__name__)
-HOST = "172.20.10.2"	## Ip del servidor
-PORT = 12345			## Puerto del servidor
+import serial
+import time
+from datetime import datetime
 
-def leer_sensor():
+app = Flask(__name__)
+
+# Configuración del puerto serial del ESP32
+PUERTO_ESP32 = "/dev/ttyUSB0"
+BAUDIOS = 115200
+
+# Estado actual del estacionamiento
+estado_actual = "Disponible"
+control_usuario = True
+historial = ["Sistema iniciado - Estado: Disponible"]
+
+def enviar_estado(codigo, nombre_estado):
+    global estado_actual
+
     try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((HOST, PORT))
-            data = s.recv(1024).decode().strip()
-            print("RECIBIDO:", data)
-            ejeX, ejeY = data.split(',')
-            ejeX = float(ejeX.replace('X:', ''))
-            ejeY = float(ejeY.replace('Y:', ''))
-            return ejeX, ejeY
+        with serial.Serial(PUERTO_ESP32, BAUDIOS, timeout=1) as esp32:
+            time.sleep(2)
+            esp32.write(f"{codigo}\n".encode())
+
+        estado_actual = nombre_estado
+        historial.append(f"{datetime.now().strftime('%H:%M:%S')} - {nombre_estado}")
 
     except Exception as e:
-        print("ERROR:", e)
-        return 0, 0
-
-@app.route('/')
+        historial.append(f"Error: {e}")
+@app.route("/")
 def index():
-    ejeY, ejeX = leer_sensor() #órden ejes.
     return render_template(
-        'index.html',
-        ejeX=ejeX,
-        ejeY=ejeY
+        "index.html",
+        estado=estado_actual,
+        historial=historial[::-1]
     )
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
- 
+@app.route("/admin")
+def admin():
+    return render_template(
+        "admin.html",
+        estado=estado_actual,
+        historial=historial[::-1]
+    )
+@app.route("/disponible")
+def disponible():
+    enviar_estado(0, "Disponible")
+    return index()
+
+@app.route("/reservado")
+def reservado():
+    enviar_estado(1, "Reservado")
+    return index()
+
+@app.route("/ocupado")
+def ocupado():
+    enviar_estado(2, "Ocupado")
+    return index()
+@app.route("/admin/disponible")
+def admin_disponible():
+    enviar_estado(0, "Disponible")
+    return admin()
+
+@app.route("/admin/reservado")
+def admin_reservado():
+    enviar_estado(1, "Reservado")
+    return admin()
+
+@app.route("/admin/ocupado")
+def admin_ocupado():
+    enviar_estado(2, "Ocupado")
+    return admin()
+
+@app.route("/admin/mantenimiento")
+def admin_mantenimiento():
+    enviar_estado(3, "Mantenimiento")
+    return admin()
+
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
