@@ -42,19 +42,30 @@ def admin():
         historial=historial[::-1]
     )
 
+@app.route("/admin/control-usuario")
+def cambiar_control_usuario():
+    global control_usuario
+    control_usuario = not control_usuario
+    return redirect(url_for("admin"))
 
 @app.route("/disponible")
 def disponible():
+    if not control_usuario:
+        return redirect(url_for("index"))
     enviar_estado(0, "Disponible")
     return redirect(url_for("index"))
 
 @app.route("/reservado")
 def reservado():
+    if not control_usuario:
+        return redirect(url_for("index"))
     enviar_estado(1, "Reservado")
     return redirect(url_for("index"))
 
 @app.route("/ocupado")
 def ocupado():
+    if not control_usuario:
+        return redirect(url_for("index"))
     enviar_estado(2, "Ocupado")
     return redirect(url_for("index"))
 
