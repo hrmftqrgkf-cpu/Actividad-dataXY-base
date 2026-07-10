@@ -1,57 +1,52 @@
-# Actividad Base: Flask + DataXY
+# Smart Parking INACAP
 
-Este repositorio es un ejemplo inicial para practicar con **Flask** y **GitHub**.
-La intensión es que los estudiantes lo usen como punto de partida, lo modifiquen y luego lo suban a su propio repositorio.
+Sistema de estacionamiento inteligente desarrollado como proyecto de la asignatura de Sistemas Embebidos.
 
----
+## Descripción
 
-## Objetivo
+El proyecto utiliza un ESP32 conectado a una aplicación web desarrollada con Flask para controlar el estado de un estacionamiento en tiempo real.
 
-* Clonar el repositorio y trabajar en una copia personal
-* Ejecutar Flask y recibir datos **x, y** desde una aplicación móvil
-* Visualizar datos en una página HTML sencilla
-* Subir cambios a GitHub
+El sistema cuenta con un panel para usuarios y un panel de administración, permitiendo cambiar estados, bloquear usuarios y visualizar un historial de eventos.
 
 ---
 
-## Requisitos
+## Funcionalidades
 
-* Entorno para Python y Flask instalados
-* Cuenta en GitHub
-* Aplicación móvil (APK) para enviar datos
+- Estado Disponible.
+- Estado Reservado.
+- Estado Ocupado.
+- Estado Mantenimiento.
+- Panel de administración.
+- Panel de usuario.
+- Bloqueo y desbloqueo de usuarios.
+- Historial de cambios.
+- Comunicación entre Flask y ESP32 mediante puerto serial.
+- Detección de desconexión del ESP32.
 
 ---
 
-## Descarga de Aplicación APK
+## Tecnologías utilizadas
 
-Se puede descargar la aplicación móvil desde aquí:
-
-[Descargar XYaTCPfull.apk](./XYaTCPfull.apk)
+- Python
+- Flask
+- HTML
+- CSS
+- ESP32
+- Arduino IDE
+- Git y GitHub
 
 ---
 
-## Pasos básicos
+## Ejecución
 
-### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/jotaefepece/Actividad-dataXY-base
-cd Actividad-dataXY-base
-```
-
-### 2. Instalar y ejecutar la aplicación apk
-
-```bash
-### La red del celular tiene que estar en la misma red local ###
-```
-
-### 3. Ejecutar Flask
+1. Conectar el ESP32 al computador.
+2. Ejecutar:
 
 ```bash
 python3 app.py
 ```
 
-### 4. Probar en el navegador
+3. Abrir el navegador en:
 
 ```
 http://127.0.0.1:5000
@@ -59,49 +54,29 @@ http://127.0.0.1:5000
 
 ---
 
-## Estructura del ejercicio
+## Estructura del proyecto
 
-```bash
+```
 .
 ├── app.py
-├── capturas
-│   ├── archivos-base.png
-│   └── vista-base.png
-├── README.md
 ├── templates
-│   └── index.html
-└── XYaTCPfull.apk
+│   ├── index.html
+│   └── admin.html
+├── capturas
+├── README.md
+└── Código ESP32
 ```
 
 ---
 
 ## Capturas
 
-### Estructura de archivos
-
-![Estructura de los archivos](capturas/archivos-base.png)
+Las capturas del funcionamiento se encuentran en la carpeta **capturas**. (Durante la carga de las capturas a GitHub desde un dispositivo móvil, varias imágenes tenían el mismo nombre (image.jpg). GitHub conservó únicamente la última imagen porque los archivos con el mismo nombre se sobrescriben. El funcionamiento completo del sistema fue verificado durante la demostración y las capturas representan el estado final del proyecto.)
 
 ---
 
-### Vista en el navegador
+## Autor
 
-![Vista HTML](capturas/vista-base.png)
-
----
-
-## Inicio del ejercicio
-
-Cada estudiante debe:
-
-* Crear una pestaña en Flask que muestre un dato recibido
-* Modificar el HTML para encender una celda en un rectángulo **2x2** según los valores **x, y**
-* Subir su versión modificada a su propio repositorio
-
----
-
-## Notas
-
-* Este README es solo una guía básica.
-* El trabajo final depende de cada estudiante y de cómo adapte el ejercicio.
-
----
+Johanan Victor
+Ingeniería Electrónica y Sistemas Inteligentes
+INACAP
