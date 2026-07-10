@@ -6,12 +6,22 @@
 <title>panel de ADMINISTRACION</title>
 
 <style>
+
 body{
     margin:0;
     padding:40px;
     background:#111827;
     color:white;
     font-family:Arial,sans-serif;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:#1f2937;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 0 30px rgba(0,0,0,.35);
 }
 .botones{
     display:grid;
@@ -30,23 +40,35 @@ body{
     transition:.2s;
 }
 
-.disponible{background:#42f5c8;}
-.reservado{background:#f4d03f;}
-.ocupado{background:#ff6b81;}
-.mantenimiento{background:#33b5ff;}
+.disponible{
+    background:#16a34a;
+}
+
+.reservado{
+    background:#ca8a04;
+}
+
+.ocupado{
+    background:#dc2626;
+}
+
+.mantenimiento{
+    background:#2563eb;
+}
 
 .botones a:hover{
     transform:scale(1.05);
     filter:brightness(1.1);
 }
+
 .card{
-    max-width:900px;
-    margin:auto;
+    width:min(900px, 92%);
+    margin:20px auto;
+    padding:32px;
     background:#1f2937;
-    padding:30px;
-    border-radius:20px;
-    border:1px solid #38bdf8;
-    box-shadow:0 0 35px rgba(56,189,248,.25);
+    border:1px solid #334155;
+    border-radius:22px;
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
 }
 
 h1{
@@ -92,7 +114,21 @@ h1{
 <a class="reservado" href="/admin/reservado">Reservado</a>
 <a class="ocupado" href="/admin/ocupado">Ocupado</a>
 <a class="mantenimiento" href="/admin/mantenimiento">Mantenimiento</a>
-<a class="mantenimiento" href="/admin/control-usuario">Bloquear / Desbloquear Usuario</a>
+<div style="grid-column:1 / -1; text-align:center; margin-top:15px;">
+
+    <p><strong>Control del usuario</strong></p>
+
+    {% if control_usuario %}
+        <a class="disponible" href="/admin/control-usuario">
+            🟢 Usuario HABILITADO (clic para bloquear)
+        </a>
+    {% else %}
+        <a class="ocupado" href="/admin/control-usuario">
+            🔴 Usuario BLOQUEADO (clic para desbloquear)
+        </a>
+    {% endif %}
+
+</div>
 </div>
 
 <h2>Historial</h2>

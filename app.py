@@ -26,7 +26,7 @@ def enviar_estado(codigo, nombre_estado):
         historial.append(f"{datetime.now().strftime('%H:%M:%S')} - {nombre_estado}")
 
     except Exception as e:
-        historial.append(f"Error: {e}")
+        historial.append("ESP32 desconectado")
 @app.route("/")
 def index():
     return render_template(
@@ -37,10 +37,11 @@ def index():
 @app.route("/admin")
 def admin():
     return render_template(
-        "admin.html",
-        estado=estado_actual,
-        historial=historial[::-1]
-    )
+    "admin.html",
+    estado=estado_actual,
+    historial=historial[::-1],
+    control_usuario=control_usuario
+)
 
 @app.route("/admin/control-usuario")
 def cambiar_control_usuario():
