@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 import serial
 import time
 from datetime import datetime
@@ -41,40 +41,43 @@ def admin():
         estado=estado_actual,
         historial=historial[::-1]
     )
+
+
 @app.route("/disponible")
 def disponible():
     enviar_estado(0, "Disponible")
-    return index()
+    return redirect(url_for("index"))
 
 @app.route("/reservado")
 def reservado():
     enviar_estado(1, "Reservado")
-    return index()
+    return redirect(url_for("index"))
 
 @app.route("/ocupado")
 def ocupado():
     enviar_estado(2, "Ocupado")
-    return index()
+    return redirect(url_for("index"))
+
+
 @app.route("/admin/disponible")
 def admin_disponible():
     enviar_estado(0, "Disponible")
-    return admin()
+    return redirect(url_for("admin"))
 
 @app.route("/admin/reservado")
 def admin_reservado():
     enviar_estado(1, "Reservado")
-    return admin()
+    return redirect(url_for("admin"))
 
 @app.route("/admin/ocupado")
 def admin_ocupado():
     enviar_estado(2, "Ocupado")
-    return admin()
+    return redirect(url_for("admin"))
 
 @app.route("/admin/mantenimiento")
 def admin_mantenimiento():
     enviar_estado(3, "Mantenimiento")
-    return admin()
-
+    return redirect(url_for("admin"))
 
 
 if __name__ == "__main__":
