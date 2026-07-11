@@ -71,7 +71,7 @@ http://127.0.0.1:5000
 
 ## Capturas
 
-Las capturas del funcionamiento se encuentran en la carpeta **capturas**. (Durante la carga de las capturas a GitHub desde un dispositivo móvil, varias imágenes tenían el mismo nombre (image.jpg). GitHub conservó únicamente la última imagen porque los archivos con el mismo nombre se sobrescriben. El funcionamiento completo del sistema fue verificado durante la demostración y las capturas representan el estado final del proyecto.) por lo cual dejare un link de youtube pàra que pueda ver todo
+Las capturas del funcionamiento se encuentran en la carpeta **capturas**. (Durante la carga de las capturas a GitHub desde un dispositivo móvil, varias imágenes tenían el mismo nombre (image.jpg). GitHub conservó únicamente la última imagen porque los archivos con el mismo nombre se sobrescriben. El funcionamiento completo del sistema fue verificado durante la demostración y las capturas representan el estado final del proyecto.) por lo cual dejare un link de youtube pàra que pueda ver todo.
 
 ---
 
